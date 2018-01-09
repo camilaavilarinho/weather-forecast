@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css?family=Macondo');
+
+
+.App {
+  text-align: center;
+  background-color: #ecf0f1;
+}
+
+.App-header {
+  background-color:#1abc9c;
+  height: 100px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-family: 'Macondo', cursive;
+  margin-top: 10px;
+}
+
+.App-main {
+  margin: 200px;
+  margin-top: 20px;
+}
+
+.date{
+  font-size: 12px;
+}
+
+.date span{
+  margin: 15px;
+}
+
+.weather-desc{
+  font-size: 14px;
+  color: #7f8c8d;
+  margin: 3px;
+}
+.main-temp{
+  font-size: 25px;
+  margin: 3px;
+}
+
+.temp-min{
+  background-color: #3498db;
+  margin: 5px;
+}
+
+.temp-max{
+  background-color: #f1c40f; 
+}
+
+.list-group{
+  align-items: center;
+}
+
+.list-group-item{
+  margin: 5px;
+  width: 25em;
+}
+
+
+.icon{
+  margin-right: 5px; 
+}
+
+@media only screen
+and (min-device-width : 320px)
+and (max-device-width : 480px){
+  .App{
+    width: 100%;
+  }
+
+  .list-group{
+    align-items: center;
+  }
+
+  .list-group-item{
+    margin: 5px;
+    width: 15em;
+  }
+  
+}
+
