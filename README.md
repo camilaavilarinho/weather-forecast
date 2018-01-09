@@ -21,7 +21,9 @@ Application displaying the 5 day weather forecast for Dublin, IE
 
 1. Clone Repository
 
-  `git clone https://github.com/camilaavilarinho/weather-forecast.git` 
+  `git clone https://github.com/camilaavilarinho/weather-forecast.git`    
+  
+  `cd weather-forecast`
 
 2. Install Dependencies
 
