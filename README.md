@@ -19,16 +19,21 @@ Application displaying the 5 day weather forecast for Dublin, IE
 
 ## How to run
 
-1. Clone Repository
+1. **Clone Repository**
 
   `git clone https://github.com/camilaavilarinho/weather-forecast.git`    
-  
+
   `cd weather-forecast`
 
-2. Install Dependencies
+2. **Install Dependencies**
 
   `npm install`
 
-3. Run App
+3. **Run App**
 
   `npm start`
+
+  ## Tech stack
+
+  * [React](https://reactjs.org/)
+  * [Reactstrap](https://github.com/reactstrap/reactstrap)
