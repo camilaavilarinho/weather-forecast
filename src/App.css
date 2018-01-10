@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Macondo');
 
-
+body{
+  background-color: #ecf0f1;
+}
 .App {
   text-align: center;
   background-color: #ecf0f1;
