@@ -19,7 +19,7 @@ const Weather = ({ item }) => {
                     <span><i className="fa fa-calendar icon" aria-hidden="true"></i>{item_date}</span>
                     <span><i className="fa fa-clock-o icon" aria-hidden="true"></i>{item_time}</span>
                 </p>
-                <img src={"http://openweathermap.org/img/w/"+weather_icon+".png"} alt={weather_desc} />
+                <img src={`http://openweathermap.org/img/w/${weather_icon}.png`} alt={weather_desc} />
                 <br/><span className="weather-desc">{weather_desc}</span>
                 <ListGroupItemHeading>
                     <Badge className="main-temp" pill>{temp} ºC</Badge>
