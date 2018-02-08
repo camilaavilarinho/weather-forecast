@@ -1,8 +1,16 @@
 import React from 'react';
 import {ListGroupItem, ListGroupItemHeading, Badge} from 'reactstrap';
-
-const Weather = ({ item }) => {
-    let key = item.dt;
+/**
+ * Renders an item of WeatherList
+ * 
+ * @prop {String}  key unique identify for the wheather item
+ * @prop {String}  item represents an item of the WheatherList
+ * @returns HTML markup for the component
+ */
+const Weather = ({ key, item }) => {
+    /** 
+     * Destructure the item
+    */
     let date = item.dt_txt.split(" ");
     let item_date = date[0];
     let item_time = date[1];
