@@ -34,6 +34,8 @@
     "jsdom": "^9.3.0",
     "mocha": "^5.0.0",
     "react-addons-test-utils": "^15.6.2",
-    "sinon": "^4.2.2"
+    "sinon": "^4.2.2",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1"
   }
 }
