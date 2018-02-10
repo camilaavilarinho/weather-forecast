@@ -14,7 +14,7 @@ import Weather from '../src/components/Weather';
     it('should render a <Weather /> component', () => {
         const wrapper = mount(<ListWeather />);        
         console.log(wrapper.html());
-        //expect(wrapper.exists(<ul class="list-group"></ul>)).to.equal(true); //OBS: tá passando para tudo
+        //expect(wrapper.exists(<ul class="list-group"></ul>)).to.equal(true); 
         expect(wrapper.find(Weather)).to.have.length(1);
         //expect(wrapper.find('h3')).to.have.length(1);
     });
