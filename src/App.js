@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import ListWeather from './components/ListWeather';
+//import ListWeather from './components/ListWeather';
+import WeatherList from './components/WeatherList';
+
 
 /**
  * Main component for the Weather-App application
@@ -23,7 +25,7 @@ class App extends Component {
           <h1 className="App-title">Weather Forecast</h1>
         </header>
         <div className="App-main">
-          <ListWeather />
+          <WeatherList />
         </div>
       </div>
     );
