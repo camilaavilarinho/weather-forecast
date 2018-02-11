@@ -24,14 +24,11 @@ class ListWeather extends React.Component {
         };
     }
     /**
-     * Do a request to the Open Weather forecast API
-     *     
-     * Ref: {@link http://openweathermap.org/forecast5 | 5 day weather forecast API}
-     * @memberof ListWeather
-     * @returns Set the state with the items resulted of the request
+     * Update the state with the value from input text search
      * 
+     * @param {string} val input text search value
+     * @memberof ListWeather
      */
-
     componentWillReceiveProps(val) {
         this.setState({
             isLoaded: true,
@@ -39,7 +36,12 @@ class ListWeather extends React.Component {
         });
         this.getContent(val);
     }
-
+    /**
+     * Handle the text search value sending to componentWillReceiveProps
+     * 
+     * @param {string} val input text search value
+     * @memberof ListWeather
+     */
     handleSearch(val) {
         this.componentWillReceiveProps(val);
     }
@@ -47,6 +49,16 @@ class ListWeather extends React.Component {
     componentDidMount() {
         this.getContent(this.state.city);
     }
+
+    /**
+     * Do a request to the Open Weather forecast API
+     *     
+     * Ref: {@link http://openweathermap.org/forecast5 | 5 day weather forecast API}
+     * @memberof ListWeather
+     * @param {string} val city name 
+     * @returns Set the state with the items resulted of the request
+     * 
+     */
 
     getContent(val) {
         if (val === '') val = this.state.city;
@@ -69,9 +81,9 @@ class ListWeather extends React.Component {
 
     }
     /**
-     * Renders the Wheather component
+     * Renders the search form and then the Wheather component
      * 
-     * @returns HTML markup for the component
+     * @returns HTML markup for the components
      * @memberof ListWeather
      * @prop {string} error prop from state
      * @prop {string} isLoaded prop from state
