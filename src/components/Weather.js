@@ -1,5 +1,5 @@
 import React from 'react';
-import {ListGroupItem, ListGroupItemHeading, Badge} from 'reactstrap';
+import { ListGroupItem, ListGroupItemHeading, Badge } from 'reactstrap';
 /**
  * Renders an item of WeatherList
  * 
@@ -7,10 +7,11 @@ import {ListGroupItem, ListGroupItemHeading, Badge} from 'reactstrap';
  * @prop {String}  item represents an item of the WheatherList
  * @returns HTML markup for the component
  */
-const Weather = ({ key, item }) => {
+const Weather = ({ item }) => {
     /** 
      * Destructure the item
     */
+    let key = item.dt;
     let date = item.dt_txt.split(" ");
     let item_date = date[0];
     let item_time = date[1];
@@ -28,7 +29,7 @@ const Weather = ({ key, item }) => {
                     <span><i className="fa fa-clock-o icon" aria-hidden="true"></i>{item_time}</span>
                 </p>
                 <img src={`http://openweathermap.org/img/w/${weather_icon}.png`} alt={weather_desc} />
-                <br/><span className="weather-desc">{weather_desc}</span>
+                <br /><span className="weather-desc">{weather_desc}</span>
                 <ListGroupItemHeading>
                     <Badge className="main-temp" pill>{temp} ºC</Badge>
                 </ListGroupItemHeading>
@@ -36,7 +37,7 @@ const Weather = ({ key, item }) => {
                     <Badge className="temp-min" >{min} ºC</Badge>
                     <Badge className="temp-max" >{max} ºC</Badge>
                 </p>
-                
+
             </div>
 
         </ListGroupItem>
