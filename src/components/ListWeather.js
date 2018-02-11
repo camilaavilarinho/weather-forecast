@@ -1,5 +1,6 @@
 import React from 'react';
-import {ListGroup} from 'reactstrap';
+import { ListGroup, Button, Form, FormGroup } from 'reactstrap';
+
 import Weather from './Weather';
 /**
  * List the Weather component
@@ -16,6 +17,7 @@ class ListWeather extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            city: 'dublin',
             error: null,
             isLoaded: false,
             items: []
@@ -24,28 +26,45 @@ class ListWeather extends React.Component {
     /**
      * Do a request to the Open Weather forecast API
      *     
-     * Ref: {@link http://openweathermap.org/forecast5| 5 day weather forecast API}
+     * Ref: {@link http://openweathermap.org/forecast5 | 5 day weather forecast API}
      * @memberof ListWeather
      * @returns Set the state with the items resulted of the request
      * 
      */
+
+    componentWillReceiveProps(val) {
+        this.setState({
+            isLoaded: true,
+            city: val
+        });
+        this.getContent(val);
+    }
+
+    handleSearch(val) {
+        this.componentWillReceiveProps(val);
+    }
+
     componentDidMount() {
-        fetch("//api.openweathermap.org/data/2.5/forecast?q=dublin,ie&units=metric&appid=a1bfda65749bde461998c5c598e4964b")
+        this.getContent(this.state.city);
+    }
+
+    getContent(val) {
+        if (val === '') val = this.state.city;
+        fetch(`//api.openweathermap.org/data/2.5/forecast?q=${val}&units=metric&appid=a1bfda65749bde461998c5c598e4964b`)
             .then(res => res.json())
             .then(
-            (result) => {
-                this.setState({
-                    isLoaded: true,
-                    items: result
-                });
-            },
-            (error) => {
-                this.setState({
-                    isLoaded: true,
-                    error
-                });
-                console.log(error);
-            }
+                (result) => {
+                    this.setState({
+                        items: result
+                    });
+                },
+                (error) => {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                    console.log(error);
+                }
             )
 
     }
@@ -63,7 +82,25 @@ class ListWeather extends React.Component {
         if (error) {
             return <div>Error: {error.message}</div>;
         } else if (!isLoaded) {
-            return <div>Loading...</div>;
+            let inputSearch = null;
+            return (
+                <div>
+                    <Form onSubmit={e => {
+                        e.preventDefault()
+                        this.handleSearch(inputSearch.value)
+                    }}>
+                        <FormGroup>
+                            <input
+                                ref={node => { inputSearch = node }}
+                                placeholder="Search City"
+                            />
+                        </FormGroup>
+                        <Button type="submit">
+                            Search
+                        </Button>
+                    </Form>
+                </div>
+            );
         } else {
             const weatherList = items.list
                 .map(item => (

@@ -18,11 +18,17 @@ body{
 .App-title {
   font-family: 'Macondo', cursive;
   margin-top: 10px;
+  width: 80%;
 }
 
 .App-main {
   margin: 200px;
   margin-top: 20px;
+}
+
+.form-group input{
+  width: 50%;
+  padding: 10px;
 }
 
 .date{
