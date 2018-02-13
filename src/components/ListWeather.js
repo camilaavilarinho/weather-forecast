@@ -102,7 +102,7 @@ class ListWeather extends React.Component {
                         this.handleSearch(inputSearch.value)
                     }}>
                         <FormGroup>
-                            <input
+                            <input className="search"
                                 ref={node => { inputSearch = node }}
                                 placeholder="Search City"
                             />
@@ -123,7 +123,7 @@ class ListWeather extends React.Component {
                 )
             return (
                 <div>
-                    <h3 className="App-title">{items.city.name}, {items.city.country}</h3>
+                    <h3 className="App-title city">{items.city.name}, {items.city.country}</h3>
                     <ListGroup >
                         {weatherList}
                     </ListGroup>
