@@ -17,10 +17,12 @@ describe('Search form', function () {
             .then(() => done())
     });
 
-    it('search for a city\'s weather forecast', function (done) {
-        driver.findElement({ css: '.search' }).sendKeys('london');
-        driver.findElement({ css: '.btn' }).click();
-        return expect(driver.findElement({ css: '.city' }).getText()).to.eventually.equal('London, GB');
+    it('search for a city\'s weather forecast', function () {
+        return driver.findElement({ css: '.search' }).sendKeys('london').then(() => {
+            return driver.findElement({ css: '.btn' }).click()
+        }).then(() => {
+            return expect(driver.findElement({ css: '.city' }).getText()).to.eventually.equal('London, GB')
+        })
     });
 
     after(function (done) {
