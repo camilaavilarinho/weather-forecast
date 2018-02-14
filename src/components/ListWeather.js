@@ -4,18 +4,23 @@ import { ListGroup, Button, Form, FormGroup } from 'reactstrap';
 import Weather from './Weather';
 /**
  * List the Weather component
- * 
  * @class ListWeather
  * @extends {React.Component}
  */
-class ListWeather extends React.Component {
+export default class ListWeather extends React.Component {
     /**
      * Constructor: set the initial state
-     * @param {any} props 
-     * @memberof ListWeather
+     * @param {object} props 
      */
     constructor(props) {
         super(props);
+        /**
+         * @type {object}
+         * @property {string} city city's name
+         * @property {string} error error message
+         * @property {string} isLoaded check if the content was loaded
+         * @property {string []} items items resulted from the API request
+         */
         this.state = {
             city: 'dublin',
             error: null,
@@ -25,9 +30,7 @@ class ListWeather extends React.Component {
     }
     /**
      * Update the state with the value from input text search
-     * 
      * @param {string} val input text search value
-     * @memberof ListWeather
      */
     componentWillReceiveProps(val) {
         this.setState({
@@ -38,9 +41,7 @@ class ListWeather extends React.Component {
     }
     /**
      * Handle the text search value sending to componentWillReceiveProps
-     * 
      * @param {string} val input text search value
-     * @memberof ListWeather
      */
     handleSearch(val) {
         this.componentWillReceiveProps(val);
@@ -51,12 +52,11 @@ class ListWeather extends React.Component {
     }
 
     /**
-     * Do a request to the Open Weather forecast API
-     *     
-     * Ref: {@link http://openweathermap.org/forecast5 | 5 day weather forecast API}
+     * Do a request to the Open Weather forecast API   
+     * @see http://openweathermap.org/forecast5 
      * @memberof ListWeather
      * @param {string} val city name 
-     * @returns Set the state with the items resulted of the request
+     * @return {Object} Set the state with the items resulted of the request
      * 
      */
 
@@ -83,11 +83,7 @@ class ListWeather extends React.Component {
     /**
      * Renders the search form and then the Wheather component
      * 
-     * @returns HTML markup for the components
-     * @memberof ListWeather
-     * @prop {string} error prop from state
-     * @prop {string} isLoaded prop from state
-     * @prop {string} items prop from state
+     * @return {ReactElement} markup for the components
      */
     render() {
         const { error, isLoaded, items } = this.state;
@@ -132,5 +128,3 @@ class ListWeather extends React.Component {
         }
     }
 }
-
-export default ListWeather;
