@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../../">
+  <title data-ice="title">src/components/ListWeather.js | weather-app</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+</head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/App.js~App.html">App</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-register">register</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-unregister">unregister</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#components">components</a><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/components/ListWeather.js~ListWeather.html">ListWeather</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-Weather">Weather</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/components/ListWeather.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import React from &apos;react&apos;;
+import { ListGroup, Button, Form, FormGroup } from &apos;reactstrap&apos;;
+
+import Weather from &apos;./Weather&apos;;
+/**
+ * List the Weather component
+ * @class ListWeather
+ * @extends {React.Component}
+ */
+export default class ListWeather extends React.Component {
+    /**
+     * Constructor: set the initial state
+     * @param {object} props 
+     */
+    constructor(props) {
+        super(props);
+        /**
+         * @type {object}
+         * @property {string} city city&apos;s name
+         * @property {string} error error message
+         * @property {string} isLoaded check if the content was loaded
+         * @property {string []} items items resulted from the API request
+         */
+        this.state = {
+            city: &apos;dublin&apos;,
+            error: null,
+            isLoaded: false,
+            items: []
+        };
+    }
+    /**
+     * Update the state with the value from input text search
+     * @param {string} val input text search value
+     */
+    componentWillReceiveProps(val) {
+        this.setState({
+            isLoaded: true,
+            city: val
+        });
+        this.getContent(val);
+    }
+    /**
+     * Handle the text search value sending to componentWillReceiveProps
+     * @param {string} val input text search value
+     */
+    handleSearch(val) {
+        this.componentWillReceiveProps(val);
+    }
+
+    componentDidMount() {
+        this.getContent(this.state.city);
+    }
+
+    /**
+     * Do a request to the Open Weather forecast API   
+     * @see http://openweathermap.org/forecast5 
+     * @memberof ListWeather
+     * @param {string} val city name 
+     * @return {Object} Set the state with the items resulted of the request
+     * 
+     */
+
+    getContent(val) {
+        if (val === &apos;&apos;) val = this.state.city;
+        fetch(`//api.openweathermap.org/data/2.5/forecast?q=${val}&amp;units=metric&amp;appid=a1bfda65749bde461998c5c598e4964b`)
+            .then(res =&gt; res.json())
+            .then(
+                (result) =&gt; {
+                    this.setState({
+                        items: result
+                    });
+                },
+                (error) =&gt; {
+                    this.setState({
+                        isLoaded: true,
+                        error
+                    });
+                    console.log(error);
+                }
+            )
+
+    }
+    /**
+     * Renders the search form and then the Wheather component
+     * 
+     * @return {ReactElement} markup for the components
+     */
+    render() {
+        const { error, isLoaded, items } = this.state;
+        if (error) {
+            return &lt;div&gt;Error: {error.message}&lt;/div&gt;;
+        } else if (!isLoaded) {
+            let inputSearch = null;
+            return (
+                &lt;div&gt;
+                    &lt;Form onSubmit={e =&gt; {
+                        e.preventDefault()
+                        this.handleSearch(inputSearch.value)
+                    }}&gt;
+                        &lt;FormGroup&gt;
+                            &lt;input className=&quot;search&quot;
+                                ref={node =&gt; { inputSearch = node }}
+                                placeholder=&quot;Search City&quot;
+                            /&gt;
+                        &lt;/FormGroup&gt;
+                        &lt;Button type=&quot;submit&quot;&gt;
+                            Search
+                        &lt;/Button&gt;
+                    &lt;/Form&gt;
+                &lt;/div&gt;
+            );
+        } else {
+            const weatherList = items.list
+                .map(item =&gt; (
+                    &lt;Weather key={item.dt}
+                        item={item}
+                    /&gt;
+                )
+                )
+            return (
+                &lt;div&gt;
+                    &lt;h3 className=&quot;App-title city&quot;&gt;{items.city.name}, {items.city.country}&lt;/h3&gt;
+                    &lt;ListGroup &gt;
+                        {weatherList}
+                    &lt;/ListGroup&gt;
+                &lt;/div&gt;
+            );
+        }
+    }
+}</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.0.4)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

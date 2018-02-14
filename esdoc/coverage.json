@@ -1,0 +1,35 @@
+{
+  "coverage": "62.5%",
+  "expectCount": 16,
+  "actualCount": 10,
+  "files": {
+    "src/App.js": {
+      "expectCount": 2,
+      "actualCount": 2,
+      "undocumentLines": []
+    },
+    "src/components/ListWeather.js": {
+      "expectCount": 8,
+      "actualCount": 7,
+      "undocumentLines": [
+        50
+      ]
+    },
+    "src/components/Weather.js": {
+      "expectCount": 1,
+      "actualCount": 1,
+      "undocumentLines": []
+    },
+    "src/registerServiceWorker.js": {
+      "expectCount": 5,
+      "actualCount": 0,
+      "undocumentLines": [
+        11,
+        21,
+        46,
+        75,
+        102
+      ]
+    }
+  }
+}
